@@ -1,0 +1,232 @@
+cmake_minimum_required(VERSION 3.12)
+
+project(opennurbs)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+file(GLOB ON_LIB_INC_FILES opennurbs_*.h)
+
+# message(${ON_LIB_INC_FILES})
+
+set(ON_LIB_SRC_FILES
+  opennurbs_3dm_attributes.cpp
+  opennurbs_3dm_properties.cpp
+  opennurbs_3dm_settings.cpp
+  opennurbs_annotationbase.cpp
+  opennurbs_arc.cpp
+  opennurbs_arccurve.cpp
+  opennurbs_archive.cpp
+  opennurbs_archive_manifest.cpp
+  opennurbs_array.cpp
+  opennurbs_base32.cpp
+  opennurbs_base64.cpp
+  opennurbs_beam.cpp
+  opennurbs_bezier.cpp
+  opennurbs_beziervolume.cpp
+  opennurbs_bitmap.cpp
+  opennurbs_bounding_box.cpp
+  opennurbs_box.cpp
+  opennurbs_brep.cpp
+  opennurbs_brep_extrude.cpp
+  opennurbs_brep_io.cpp
+  opennurbs_brep_isvalid.cpp
+  opennurbs_brep_region.cpp
+  opennurbs_brep_tools.cpp
+  opennurbs_brep_v2valid.cpp
+  opennurbs_calculator.cpp
+  opennurbs_circle.cpp
+  opennurbs_color.cpp
+  opennurbs_compress.cpp
+  opennurbs_compstat.cpp
+  opennurbs_cone.cpp
+  opennurbs_crc.cpp
+  opennurbs_curve.cpp
+  opennurbs_curveonsurface.cpp
+  opennurbs_curveproxy.cpp
+  opennurbs_cylinder.cpp
+  opennurbs_date.cpp
+  opennurbs_defines.cpp
+  opennurbs_detail.cpp
+  opennurbs_dimension.cpp
+  opennurbs_dimensionformat.cpp
+  opennurbs_dimensionstyle.cpp
+  opennurbs_ellipse.cpp
+  opennurbs_embedded_file.cpp
+  opennurbs_error.cpp
+  opennurbs_error_message.cpp
+  opennurbs_evaluate_nurbs.cpp
+  opennurbs_extensions.cpp
+  opennurbs_file_utilities.cpp
+  opennurbs_font.cpp
+  opennurbs_freetype.cpp
+  opennurbs_fsp.cpp
+  opennurbs_function_list.cpp
+  opennurbs_geometry.cpp
+  opennurbs_glyph_outline.cpp
+  opennurbs_group.cpp
+  opennurbs_hash_table.cpp
+  opennurbs_hatch.cpp
+  opennurbs_instance.cpp
+  opennurbs_internal_V2_annotation.cpp
+  opennurbs_internal_V5_annotation.cpp
+  opennurbs_internal_V5_dimstyle.cpp
+  opennurbs_internal_Vx_annotation.cpp
+  opennurbs_intersect.cpp
+  opennurbs_ipoint.cpp
+  opennurbs_knot.cpp
+  opennurbs_layer.cpp
+  opennurbs_leader.cpp
+  opennurbs_light.cpp
+  opennurbs_line.cpp
+  opennurbs_linecurve.cpp
+  opennurbs_linetype.cpp
+  opennurbs_locale.cpp
+  opennurbs_lock.cpp
+  opennurbs_lookup.cpp
+  opennurbs_material.cpp
+  opennurbs_math.cpp
+  opennurbs_matrix.cpp
+  opennurbs_md5.cpp
+  opennurbs_memory_util.cpp
+  opennurbs_mesh.cpp
+  opennurbs_mesh_ngon.cpp
+  opennurbs_mesh_tools.cpp
+  opennurbs_mesh_topology.cpp
+  opennurbs_model_component.cpp
+  opennurbs_model_geometry.cpp
+  opennurbs_morph.cpp
+  opennurbs_nurbscurve.cpp
+  opennurbs_nurbssurface.cpp
+  opennurbs_nurbsvolume.cpp
+  opennurbs_object.cpp
+  opennurbs_object_history.cpp
+  opennurbs_objref.cpp
+  opennurbs_offsetsurface.cpp
+  opennurbs_optimize.cpp
+  opennurbs_parse_angle.cpp
+  opennurbs_parse_length.cpp
+  opennurbs_parse_number.cpp
+  opennurbs_parse_point.cpp
+  opennurbs_parse_settings.cpp
+  opennurbs_photogrammetry.cpp
+  opennurbs_plane.cpp
+  opennurbs_planesurface.cpp
+  opennurbs_pluginlist.cpp
+  opennurbs_point.cpp
+  opennurbs_pointcloud.cpp
+  opennurbs_pointgeometry.cpp
+  opennurbs_pointgrid.cpp
+  opennurbs_polycurve.cpp
+  opennurbs_polyedgecurve.cpp
+  opennurbs_polyline.cpp
+  opennurbs_polylinecurve.cpp
+  opennurbs_precompiledheader.cpp
+  opennurbs_progress_reporter.cpp
+  opennurbs_public_memory.cpp
+  opennurbs_quaternion.cpp
+  opennurbs_rand.cpp
+  opennurbs_revsurface.cpp
+  opennurbs_rtree.cpp
+  opennurbs_sha1.cpp
+  opennurbs_sleeplock.cpp
+  opennurbs_sort.cpp
+  opennurbs_sphere.cpp
+  opennurbs_statics.cpp
+  opennurbs_std_string_format.cpp
+  opennurbs_std_string_utf.cpp
+  opennurbs_string.cpp
+  opennurbs_string_compare.cpp
+  opennurbs_string_format.cpp
+  opennurbs_string_scan.cpp
+  opennurbs_string_values.cpp
+  opennurbs_subd.cpp
+  opennurbs_subd_archive.cpp
+  opennurbs_subd_copy.cpp
+  opennurbs_subd_data.cpp
+  opennurbs_subd_eval.cpp
+  opennurbs_subd_fragment.cpp
+  opennurbs_subd_frommesh.cpp
+  opennurbs_subd_heap.cpp
+  opennurbs_subd_iter.cpp
+  opennurbs_subd_limit.cpp
+  opennurbs_subd_matrix.cpp
+  opennurbs_subd_mesh.cpp
+  opennurbs_subd_ref.cpp
+  opennurbs_subd_ring.cpp
+  opennurbs_subd_sector.cpp
+  opennurbs_subd_texture.cpp
+  opennurbs_sum.cpp
+  opennurbs_sumsurface.cpp
+  opennurbs_surface.cpp
+  opennurbs_surfaceproxy.cpp
+  opennurbs_symmetry.cpp
+  opennurbs_terminator.cpp
+  opennurbs_text.cpp
+  opennurbs_text_style.cpp
+  opennurbs_textcontext.cpp
+  opennurbs_textglyph.cpp
+  opennurbs_textiterator.cpp
+  opennurbs_textlog.cpp
+  opennurbs_textobject.cpp
+  opennurbs_textrun.cpp
+  opennurbs_topology.cpp
+  opennurbs_torus.cpp
+  opennurbs_unicode.cpp
+  opennurbs_unicode_cpsb.cpp
+  opennurbs_units.cpp
+  opennurbs_userdata.cpp
+  opennurbs_userdata_obsolete.cpp
+  opennurbs_uuid.cpp
+  opennurbs_version.cpp
+  opennurbs_version_number.cpp
+  opennurbs_viewport.cpp
+  opennurbs_workspace.cpp
+  opennurbs_wstring.cpp
+  opennurbs_xform.cpp
+  opennurbs_zlib.cpp
+  opennurbs_zlib_memory.cpp
+  )
+
+set(ON_ZIP_SRC_FILES
+  zlib/adler32.c
+  zlib/compress.c
+  zlib/crc32.c
+  zlib/deflate.c
+  zlib/infback.c
+  zlib/inffast.c
+  zlib/inflate.c
+  zlib/inftrees.c
+  zlib/trees.c
+  zlib/uncompr.c
+  zlib/zutil.c
+  )
+
+set_source_files_properties(
+  ${ON_LIB_SRC_FILES}
+  PROPERTIES COMPILE_FLAGS "-DON_COMPILING_OPENNURBS -DON_CLANG_CONSTRUCTOR_BUG -fPIC"
+  )
+
+set_source_files_properties(
+  ${ON_ZIP_SRC_FILES}
+  PROPERTIES COMPILE_FLAGS "-DMY_ZCALLOC -DZ_PREFIX"
+  )
+
+include_directories(.)
+
+add_library(opennurbs_public STATIC
+  ${ON_LIB_SRC_FILES}
+  ${ON_ZIP_SRC_FILES}
+  )
+
+install(TARGETS
+  opennurbs_public
+  DESTINATION
+  lib
+  )
+
+install(FILES
+  ${ON_LIB_INC_FILES}
+  DESTINATION
+  include
+  )

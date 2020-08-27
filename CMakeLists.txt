@@ -5,9 +5,22 @@ project(opennurbs)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-file(GLOB ON_LIB_INC_FILES opennurbs_*.h)
+file(GLOB ON_LIB_INC_FILES opennurbs*.h)
 
 # message(${ON_LIB_INC_FILES})
+
+set(ON_UUID_SRC_FILES
+  android_uuid/clear.c
+  android_uuid/compare.c
+  android_uuid/copy.c
+  android_uuid/gen_uuid.c
+  android_uuid/isnull.c
+  android_uuid/pack.c
+  android_uuid/parse.c
+  android_uuid/unpack.c
+  android_uuid/unparse.c
+  android_uuid/uuid_time.c
+  )
 
 set(ON_LIB_SRC_FILES
   opennurbs_3dm_attributes.cpp
@@ -204,7 +217,7 @@ set(ON_ZIP_SRC_FILES
 
 set_source_files_properties(
   ${ON_LIB_SRC_FILES}
-  PROPERTIES COMPILE_FLAGS "-DON_COMPILING_OPENNURBS -DON_CLANG_CONSTRUCTOR_BUG -fPIC"
+  PROPERTIES COMPILE_FLAGS "-DON_RUNTIME_LINUX -DON_COMPILING_OPENNURBS -DON_CLANG_CONSTRUCTOR_BUG -fPIC"
   )
 
 set_source_files_properties(
@@ -217,6 +230,7 @@ include_directories(.)
 add_library(opennurbs_public STATIC
   ${ON_LIB_SRC_FILES}
   ${ON_ZIP_SRC_FILES}
+  ${ON_UUID_SRC_FILES}
   )
 
 install(TARGETS
@@ -230,3 +244,4 @@ install(FILES
   DESTINATION
   include
   )
+
